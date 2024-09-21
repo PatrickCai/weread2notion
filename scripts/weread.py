@@ -194,6 +194,7 @@ def get_notebooklist():
         data = r.json()
         books = data.get("books")
         books.sort(key=lambda x: x["sort"])
+        print(books)
         return books
     else:
         print(r.text)
@@ -403,10 +404,10 @@ if __name__ == "__main__":
     options = parser.parse_args()
     weread_cookie = get_cookie()
     database_id = extract_page_id()
-    notion_token = os.getenv("NOTION_TOKEN")
+    # notion_token = os.getenv("NOTION_TOKEN")
     session = requests.Session()
     session.cookies = parse_cookie_string(weread_cookie)
-    client = Client(auth=notion_token, log_level=logging.ERROR)
+    # client = Client(auth=notion_token, log_level=logging.ERROR)
     session.get(WEREAD_URL)
     latest_sort = get_sort()
     books = get_notebooklist()
